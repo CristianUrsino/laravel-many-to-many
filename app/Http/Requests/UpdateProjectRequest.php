@@ -32,7 +32,7 @@ class UpdateProjectRequest extends FormRequest
             'image.max'=>'image a maximum :max characters',
             'project_status'=>['required'],
             'type_id'=>['nullable', 'exists:types,id'],
-
+            'technologies'=>['exists:technologies,id'],
         ];
     }
 

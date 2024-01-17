@@ -31,6 +31,7 @@ class StoreProjectRequest extends FormRequest
             'image'=>['nullable', 'image', 'mimes:jpeg,png,gif,bmp,svg', 'max:255'],
             'project_status'=>['required'],
             'type_id'=>['nullable', 'exists:types,id'],
+            'technologies'=>['exists:technologies,id'],
         ];
     }
 
