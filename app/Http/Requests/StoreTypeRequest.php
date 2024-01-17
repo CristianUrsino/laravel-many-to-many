@@ -23,7 +23,7 @@ class StoreTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required','max:255', Rule::unique('types')],
+            'name'=>['required','max:200', Rule::unique('types')],
         ];
     }
     public function messages(){
