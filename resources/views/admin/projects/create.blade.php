@@ -73,6 +73,16 @@
                 @enderror
             </div>
 
+            <div class="form-group">
+                <div>tech:</div>
+                @foreach($technologies as $technology)
+                    <div class="form-check @error('technologies') is-invalid @enderror">
+                        <input type="checkbox" name="technologies[]" value="{{ $technology->id }}" {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
+                        <label class="form-check-label">{{ $technology->name }}</label>
+                    </div>
+                @endforeach
+            </div>
+
             <div>
                 <button type="submit" class="btn">Invia</button>
                 <button type="reset" class="btn">Reset</button>

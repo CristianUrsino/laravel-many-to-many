@@ -40,12 +40,18 @@
                 @enderror
             </div>
 
+            
             <div class="mb-3">
                 <label for="image">image</label>
+                <div class="d-flex align-items-center">
+                @if($project->image)
+                    <div><img style="width: 250px" src="{{asset('storage/'.$project->image)}}" alt="image of {{$project->name}}"></div>
+                @endif
                 <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image" value="{{ old('image'). $project->image }}">
                 @error('image')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
+                </div>
             </div>
 
             <div class="mb-3">
@@ -65,12 +71,28 @@
                 <select name="type_id" id="type_id">
                     <option value="">scegli i tipi</option>
                     @foreach($types as $type)
-                        <option value="{{$type->id}}" {{old('type_id'. $project->type_id) == $type->id ? 'selected' : ''}}>{{$type->name}}</option>
+                        <option value="{{ $type->id }}" {{ old('type_id', $project->type_id) == $type->id ? 'selected' : '' }}>
+                            {{ $type->name }}
+                        </option>
                     @endforeach
                 </select>
-                @error('type')
+                @error('type_id')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
+            </div>
+
+            <div class="form-group">
+                <div>tech:</div>
+            
+                @foreach($technologies as $technology)
+                    <div class="form-check @error('technologies') is-invalid @enderror">
+                        @if($errors->any())
+                        @else
+                            <input type="checkbox" name="technologies[]" value="{{ $technology->id }}" {{ $project->technologies->contains($technology->id) ? 'checked' : '' }}>
+                        @endif
+                        <label class="form-check-label">{{ $technology->name }}</label>
+                    </div>
+                @endforeach
             </div>
 
             <div>
